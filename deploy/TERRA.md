@@ -17,7 +17,7 @@ This repository does not host a dynamic backend or the software engines of the n
 The site deployment is automated using GitHub Actions and GitHub Pages:
 
 1. **Triggering Workflow**:
-   Defined in [.github/workflows/pages.yml](file:///Users/brianyandell/Documents/GitHub/TERRA/.github/workflows/pages.yml#L4-L10):
+   Defined in `.github/workflows/pages.yml`:
    - Fires automatically on pushes to the `main` branch affecting `site/**` or the workflow file itself.
    - Can also be triggered manually via `workflow_dispatch`.
 
@@ -29,14 +29,14 @@ The site deployment is automated using GitHub Actions and GitHub Pages:
        path: site
      ```
 
-   - **Key Detail**: Only the contents of the `site/` folder are uploaded as the artifact root. The repository root files ([README.md](file:///Users/brianyandell/Documents/GitHub/TERRA/README.md), [LICENSE](file:///Users/brianyandell/Documents/GitHub/TERRA/LICENSE), `.gitignore`, etc.) are not published to the web.
+   - **Key Detail**: Only the contents of the `site/` folder are uploaded as the artifact root. The repository root files (`README.md`, `LICENSE`, `.gitignore`, etc.) are not published to the web.
    - Therefore, `site/index.html` serves as the entry point at `https://atniclimate.github.io/TERRA/`.
 
 3. **Deployment Step**:
    - `actions/deploy-pages@v5` deploys the packaged artifact directly to the GitHub Pages environment (`github-pages`) under the `atniclimate` organization namespace.
 
 4. **Jekyll Bypass (`.nojekyll`)**:
-   - [site/.nojekyll](file:///Users/brianyandell/Documents/GitHub/TERRA/site/.nojekyll) is present in the artifact root. By default, GitHub Pages attempts to process repositories with Jekyll, which ignores directories starting with underscores. The `.nojekyll` file forces GitHub Pages to serve all files as static assets, ensuring paths like `site/iter/_kernel/` remain accessible.
+   - `site/.nojekyll` is present in the artifact root. By default, GitHub Pages attempts to process repositories with Jekyll, which ignores directories starting with underscores. The `.nojekyll` file forces GitHub Pages to serve all files as static assets, ensuring paths like `site/iter/_kernel/` remain accessible.
 
 5. **No Build Step**:
    - There are no npm scripts, Node dependencies, Webpack/Vite bundlers, or compilation commands. The site runs on pure HTML, CSS, client-side vanilla JavaScript, and self-hosted static assets.
@@ -47,8 +47,8 @@ The site deployment is automated using GitHub Actions and GitHub Pages:
 
 Everything inside the `site/` directory is tracked and deployed:
 
-- **Primary Interface**: [site/index.html](file:///Users/brianyandell/Documents/GitHub/TERRA/site/index.html) (a standalone single-page application with "Field Station" and "Dossier" views, timeline controls, sovereignty framework matrices, and an embedded JSON data registry in `<script id="deck-data">`).
-- **Iteration Reviews**: [site/iter/](file:///Users/brianyandell/Documents/GitHub/TERRA/site/iter) containing iteration mockups and comparison pages (`_kernel/`, `dossier/`, `dot-matrix/`, `field-station/`, and `ops-board/`).
+- **Primary Interface**: `site/index.html` (a standalone single-page application with "Field Station" and "Dossier" views, timeline controls, sovereignty framework matrices, and an embedded JSON data registry in `<script id="deck-data">`).
+- **Iteration Reviews**: `site/iter/` containing iteration mockups and comparison pages (`_kernel/`, `dossier/`, `dot-matrix/`, `field-station/`, and `ops-board/`).
 - **Bundled Assets**:
   - **Self-Hosted Typography**: League Spartan and Poppins (`site/assets/fonts/`).
   - **Photography**: Over 130 art-directed, metadata-stripped Pacific Northwest landscape photographs (`site/assets/photos/`).
@@ -59,7 +59,7 @@ Everything inside the `site/` directory is tracked and deployed:
 
 ### 4. What is NOT Included in This Repository
 
-As noted in [.gitignore](file:///Users/brianyandell/Documents/GitHub/TERRA/.gitignore#L1-L8) and the site's data records:
+As noted in `.gitignore` and the site's data records:
 
 1. **The Source Code and Backends of the 9 Applications**:
    TERRA is a portfolio dashboard, not a monorepo. The actual applications reside in separate repositories or environments:
@@ -75,7 +75,7 @@ As noted in [.gitignore](file:///Users/brianyandell/Documents/GitHub/TERRA/.giti
    - The Tiered Sovereign Data Framework (TSDF) documentation linked in the UI is hosted in its own documentation repository at `https://atniclimate.github.io/TieredSovereignDataFramework/`.
 
 3. **Development & Planning Artifacts (Excluded by Git Allowlist)**:
-   - [.gitignore](file:///Users/brianyandell/Documents/GitHub/TERRA/.gitignore) uses an explicit root allowlist (`/*` ignored except `.gitignore`, `site/`, `.github/`, `README.md`, `LICENSE*`).
+   - `.gitignore` uses an explicit root allowlist (`/*` ignored except `.gitignore`, `site/`, `.github/`, `README.md`, `LICENSE*`).
    - Explicitly excluded and kept local by design:
      - Planning documents and design prompts
      - AI agent configurations and scratch files
