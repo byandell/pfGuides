@@ -2,23 +2,10 @@
 
 ## Prompt
 
-Using `https://byandell.github.io/DocumentTools/github/serverless.html`, explain concisely how this repo gets deployed to produce
-`https://atniclimate.github.io/[policy-sentinel/`. Avoid duplication of content. Use mermaid for any flowchart.
+Using <https://byandell.github.io/DocumentTools/github/serverless.html>, explain concisely how this repo gets deployed to produce
+<https://atniclimate.github.io/policy-sentinel/>. Avoid duplication of content. Use mermaid for any flowchart.
 
 ## Response
-
-Searched site:byandell.github.io/DocumentTools/github/serverless.html
-Searched "DocumentTools" "serverless" byandell
-Searched site:github.com/byandell/DocumentTools
-Ran find serverless.html on local machine · Exited with code 1
-Searched "byandell.github.io" "serverless"
-Ran list sibling repositories in GitHub folder · Exited with code 1
-Ran fetch DocumentTools serverless page
-Ran fetch DocumentTools serverless page
-Ran extract text from serverless.html output · Exited with code 1
-Ran extract text using regex
-Ran extract further lines from serverless.html output
-Ran extract section 4 and on from serverless.html output
 
 Following the serverless deployment pattern documented in [DocumentTools: Serverless Interactive Website](https://byandell.github.io/DocumentTools/github/serverless.html), this repository deploys without a dedicated 24/7 web application server (such as Shiny, Flask, or Django).
 
@@ -67,21 +54,21 @@ flowchart TD
 
 #### 1. Static Bundling & Local Quality Gate
 
-- **Compiling the Frontend**: Running `npm run demo:build` executes Vite via [vite.demo.config.ts](file:///Users/brianyandell/Documents/GitHub/policy-sentinel/vite.demo.config.ts#L9-L24). With `base: './'`, assets are generated using relative URLs, outputting static files directly into `docs/index.html` and `docs/demo-assets/`.
-- **Integrity & Safeguard Scan**: [scripts/finish-demo-build.mjs](file:///Users/brianyandell/Documents/GitHub/policy-sentinel/scripts/finish-demo-build.mjs#L55-L100) acts as the local deterministic gate:
+- **Compiling the Frontend**: Running `npm run demo:build` executes Vite via `vite.demo.config.ts`. With `base: './'`, assets are generated using relative URLs, outputting static files directly into `docs/index.html` and `docs/demo-assets/`.
+- **Integrity & Safeguard Scan**: `scripts/finish-demo-build.mjs` acts as the local deterministic gate:
   - Verifies asset signatures and packages licenses into `docs/THIRD-PARTY-NOTICES.txt`.
   - Scans compiled output to guarantee zero tracking pixels, analytics scripts, or leaked secrets.
   - Ensures `docs/.nojekyll` is present so GitHub Pages bypasses Jekyll processing.
 
 #### 2. Publishing to GitHub Pages
 
-- Unlike workflows that compile on a GitHub Actions runner, reviewed `docs/` artifacts in this repository are committed directly to `main` via authorized Pull Requests (governed by [AGENTS.md](file:///Users/brianyandell/Documents/GitHub/policy-sentinel/AGENTS.md#L94-L100)).
-- GitHub Pages serves the `/docs` directory directly as a high-speed static CDN at **`https://atniclimate.github.io/policy-sentinel/`**.
+- Unlike workflows that compile on a GitHub Actions runner, reviewed `docs/` artifacts in this repository are committed directly to `main` via authorized Pull Requests (governed by `AGENTS.md`).
+- GitHub Pages serves the `/docs` directory directly as a high-speed static CDN at **<https://atniclimate.github.io/policy-sentinel/>**.
 
 #### 3. Edge Serverless Proxy (Cloudflare Worker)
 
 - While pure client-side apps query public endpoints directly, federal policy APIs (e.g., GovInfo, Congress.gov, Regulations.gov) require API keys (`DATA_GOV_API_KEY`) and enforce strict rate limits.
-- To prevent secrets from leaking into the browser and avoid CORS blocks, the backend proxy in [worker/wrangler.toml](file:///Users/brianyandell/Documents/GitHub/policy-sentinel/worker/wrangler.toml#L1-L32) is deployed to Cloudflare Workers (`npm run demo:worker:deploy`). It enforces origin checks, version-scoped caching, and rate limiting.
+- To prevent secrets from leaking into the browser and avoid CORS blocks, the backend proxy in `worker/wrangler.toml` is deployed to Cloudflare Workers (`npm run demo:worker:deploy`). It enforces origin checks, version-scoped caching, and rate limiting.
 
 #### 4. Live Release Verification
 
@@ -91,4 +78,4 @@ flowchart TD
   node scripts/verify-demo-browser.mjs --url https://atniclimate.github.io/policy-sentinel/ --out <folder>
   ```
 
-- [scripts/verify-demo-browser.mjs](file:///Users/brianyandell/Documents/GitHub/policy-sentinel/scripts/verify-demo-browser.mjs#L30-L50) audits the live URL: it performs an axe WCAG accessibility check, validates CSP/network boundaries, and confirms that all deployed runtime files match the committed build.
+- `scripts/verify-demo-browser.mjs` audits the live URL: it performs an axe WCAG accessibility check, validates CSP/network boundaries, and confirms that all deployed runtime files match the committed build.

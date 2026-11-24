@@ -3,6 +3,16 @@
 Guides associated with
 [Patrick Freeland](https://www.linkedin.com/in/patrickfreeland/)
 projects with <https://github.com/atniclimate/>.
+This is a collaboration between Patrick [Brian Yandell](https://byandell.github.io/).
+
+## DocumentTools Pages
+
+The following pages were developed in
+[DocumentTools](https://github.com/byandell/DocumentTools)
+based on discussion with and repos of Patrick Freeland.
+
+- [Build and Launch a Serverless Interactive Website](https://byandell.github.io/DocumentTools/github/serverless.html)
+- [Harness for Document Content Analysis](https://byandell.github.io/DocumentTools/AI/harness.html#harness-for-document-content-analysis)
 
 ## Deployments
 
@@ -10,7 +20,7 @@ At present this only includes guides to how certain
 repos are deployed to the web.
 The primary prompt to Gemini 3.8 Flash in Antigravity was:
 
-*Using `https://byandell.github.io/DocumentTools/github/serverless.html`, explain concisely how this repo gets deployed to produce
+*Using <https://byandell.github.io/DocumentTools/github/serverless.html>, explain concisely how this repo gets deployed to produce
 `https://atniclimate.github.io/[repo-name]/`. Avoid duplication of content. Use mermaid for any flowchart.*
 
 Websites are `https://atniclimate.github.io/[repo-name]/`;
